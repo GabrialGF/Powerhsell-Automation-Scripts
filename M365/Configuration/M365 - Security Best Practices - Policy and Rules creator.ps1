@@ -35,7 +35,7 @@ try{
     Write-Host -ForegroundColor Red -BackgroundColor Black "https://www.powershellgallery.com/packages/ExchangeOnlineManagement/"
     Exit
 } Catch [System.AggregateException]{
-    Write-Host -ForegroundColor Red -BackgroundColor Black "You have exited the login window of the window expired. Please rerun the script again"
+    Write-Host -ForegroundColor Red -BackgroundColor Black "You have exited the login window or the window expired. Please rerun the script again"
     Exit
 }
 #Domains to have policies applied agaianst
