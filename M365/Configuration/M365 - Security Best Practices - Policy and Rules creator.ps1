@@ -53,7 +53,7 @@ Do{
 
 If ($answer -eq 1) {
     $domainsArray = Get-AcceptedDomain
-    $domains = $domains | Out-String
+    $domains = $domainsArray | Out-String
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
