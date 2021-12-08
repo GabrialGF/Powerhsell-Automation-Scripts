@@ -52,7 +52,8 @@ Do{
 }until ($answer -match "[123]") 
 
 If ($answer -eq 1) {
-    $domains = Get-AcceptedDomain
+    $domainsArray = Get-AcceptedDomain
+    $domains = $domains | Out-String
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
@@ -82,7 +83,8 @@ If ($answer -eq 3){
 }
 
 #Begin Applying Policies
-$steps = ([System.Management.Automation.PsParser]::Tokenize((Get-Content "$PSScriptRoot\$($MyInvocation.MyCommand.Name)"), [ref]$null) | Where-Object { $_.Type -eq 'Command' -and $_.Content -eq 'Write-Progress' }).Count
+#$steps = ([System.Management.Automation.PsParser]::Tokenize((Get-Content "$PSScriptRoot\$($MyInvocation.MyCommand.Name)"), [ref]$null) | Where-Object { $_.Type -eq 'Command' -and $_.Content -eq 'Write-Progress' }).Count
+$steps = 14
 $stepCounter = 0
 
 #Created new antiphish policy with all recommended settings per MSFT
