@@ -52,8 +52,7 @@ Do{
 }until ($answer -match "[123]") 
 
 If ($answer -eq 1) {
-    $domainsArray = Get-AcceptedDomain
-    $domains = $domainsArray | Out-String
+    $domains = Get-AcceptedDomain |  select -ExpandProperty domainname
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
@@ -61,7 +60,7 @@ If ($answer -eq 1) {
 }
 
 If ($answer -eq 2) {
-    $domains = Get-AcceptedDomain | Where-Object {$_.DomainType -eq 'Authoritative'}
+    $domains = Get-AcceptedDomain | Where{$_.Default -eq 'True'} | select -ExpandProperty domainname
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
@@ -93,7 +92,7 @@ New-AntiPhishPolicy -Name "M365 AntiPhish Best Practice" -AdminDisplayName "M365
 
 #Create AntiPhish rule to apply a policy to, also specify targeted domains or users
 Write-Progress -Activity 'Applying Policies' -Status 'Applying AntiPhish Policy' -PercentComplete ((($stepCounter++) / $steps) * 100)
-New-AntiPhishRule -Name "M365 AntiPhish Best Practice Default Rules" -AntiPhishPolicy "M365 AntiPhish Best Practice" -RecipientDomainIs $domains
+New-AntiPhishRule -Name "M365 AntiPhish Best Practice Default Rules" -AntiPhishPolicy "M365 AntiPhish Best Practice" #-RecipientDomainIs $domains
 
 #Create New AntiSpam inbound policy
 Write-Progress -Activity 'Applying Policies' -Status 'Creating AntiSpam Inbound Policy' -PercentComplete ((($stepCounter++) / $steps) * 100)
