@@ -9,10 +9,10 @@ Get-ADObject -LDAPFilter "objectClass=Contact" -Properties proxyaddresses | Sele
 
 
 #Import ProxyAddresses CSV
-$File = Import-CSV -Path "C:\Temp\proxyaddresses-test.csv"
+$File = Import-CSV -Path "C:\Temp\proxyaddresses.csv"
 
 #ForEach loop that splits the proxy addresses into multiple lines and adds them to their respective user accounts
-$File | ForEach { 
+$File | ForEach-Object { 
 
 #Variable needed to split proxyaddresses into multiple items
 $pa = $_.proxyaddresses -split ';'
