@@ -52,7 +52,7 @@ Do{
 }until ($answer -match "[123]") 
 
 If ($answer -eq 1) {
-    $domains = Get-AcceptedDomain |  select -ExpandProperty domainname
+    $domains = Get-AcceptedDomain |  Select-Object -ExpandProperty domainname
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
@@ -60,7 +60,7 @@ If ($answer -eq 1) {
 }
 
 If ($answer -eq 2) {
-    $domains = Get-AcceptedDomain | Where{$_.Default -eq 'True'} | select -ExpandProperty domainname
+    $domains = Get-AcceptedDomain | Where-Object{$_.Default -eq 'True'} | Select-Object -ExpandProperty domainname
     Write-Host 'The following domains will have the Security policies Applied:'
     Write-Host $domains
     Write-Host ""
